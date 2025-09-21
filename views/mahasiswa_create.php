@@ -31,7 +31,6 @@
     <select name="jurusan_id" id="jurusan" required class="styled-select">
         <option value="">-- Pilih Jurusan --</option>
     </select><br>
-
     <button type="submit">Simpan</button>
 </form>
 
