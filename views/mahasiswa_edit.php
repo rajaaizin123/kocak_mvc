@@ -29,13 +29,20 @@
     Jurusan:
     <select name="jurusan_id" id="jurusan" required class="styled-select">
         <option value="">-- Pilih Jurusan --</option>
-    </select><br>
+        <?php foreach ($jurusanList as $j) : ?>
+            <option value="<?= $j['id']; ?>" <?= ($j['id'] == $jurusan_aktif ? 'selected' : ''); ?>>
+                <?= htmlspecialchars($j['nama']); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <br>
 
     <button type="submit">Update</button>
+    <a href="index.php?controller=mahasiswa&action=index">Kembali</a>
 </form>
 
-<a href="index.php?controller=mahasiswa&action=index">Kembali</a>
+<script src="<?= BASEURL ?>/assets/js/script.js"></script>
+<script>
 
-<script src="../assets/js/script.js"></script>
-
+</script>
 <?php include 'partials/footer.php'; ?>

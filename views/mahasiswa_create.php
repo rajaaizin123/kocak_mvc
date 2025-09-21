@@ -31,11 +31,12 @@
     <select name="jurusan_id" id="jurusan" required class="styled-select">
         <option value="">-- Pilih Jurusan --</option>
     </select><br>
+
     <button type="submit">Simpan</button>
 </form>
 
 <a href="index.php?controller=mahasiswa&action=index">Kembali</a>
 
-<script src="../assets/js/script.js"></script>
+<script src="<?=BASEURL?>/assets/js/script.js"></script>
 
 <?php include 'partials/footer.php'; ?>

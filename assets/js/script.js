@@ -26,3 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
         fakultasEl.dispatchEvent(new Event('change'));
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  let selectedValue = "<?= $jurusan_aktif['id'] ?>";
+  let select = document.getElementById("jurusan");
+  if (select) {
+    select.value = selectedValue;
+  }
+});
