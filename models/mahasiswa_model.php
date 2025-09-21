@@ -112,10 +112,10 @@ class Mahasiswa {
         return $rows;
     }
 
-    public function getJurusanByFakultas($faculty_id) 
+    public function getJurusanByFakultas($fakultas_id) 
     {
         $stmt = $this->conn->prepare("SELECT * FROM jurusan WHERE fakultas_id=?");
-        $stmt->bind_param("i", $faculty_id);
+        $stmt->bind_param("i", $fakultas_id);
         $stmt->execute();
         $res = $stmt->get_result();
         $rows = [];

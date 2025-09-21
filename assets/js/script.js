@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const fakultasEl = document.getElementById('fakultas');
     const jurusanEl = document.getElementById('jurusan');
-    const selectedJurusan = "<?= $mhs['jurusan_id'] ?? '' ?>"; // dari PHP
+    const jurusan_session = "<?= $mhs['jurusan_id'] ?? '' ?>"; // dari PHP
 
     fakultasEl.addEventListener('change', function() {
         const fid = this.value;
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const opt = document.createElement('option');
                     opt.value = j.id;
                     opt.textContent = j.nama;
-                    if(j.id == selectedJurusan) opt.selected = true; // set selected
+                    if(j.id == jurusan_session) opt.selected = true; // set selected
                     jurusanEl.appendChild(opt);
                 });
             })
