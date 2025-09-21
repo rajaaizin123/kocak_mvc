@@ -28,43 +28,16 @@
     </select><br>
 
     Jurusan:
-    <select name="jurusan_id" id="jurusan" required class="styled-select">
+    <select name="jurusan_id" id="jurusan" data-selected="<?= $mhs['jurusan_id'] ?? '' ?>" required class="styled-select">
         <option value="">-- Pilih Jurusan --</option>
-    </select><br>
+    </select>
+    <br>
 
     <button type="submit">Simpan</button>
 </form>
 
 <a href="index.php?controller=mahasiswa&action=index">Kembali</a>
 
-<script src="<?=BASEURL?>/assets/js/script.js"></script>
-<script>
-const fakultasEl = document.getElementById('fakultas');
-const jurusanEl = document.getElementById('jurusan');
-const jurusan_session = "<?= $mhs['jurusan_id'] ?? '' ?>";
-
-fakultasEl.addEventListener('change', function() {
-    const fid = this.value;
-    jurusanEl.innerHTML = '<option value="">-- Pilih Jurusan --</option>';
-    if (!fid) return;
-
-    fetch(`index.php?controller=mahasiswa&action=getJurusanAjax&fakultas_id=${fid}`)
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(j => {
-                const opt = document.createElement('option');
-                opt.value = j.id;
-                opt.textContent = j.nama;
-                if(j.id == jurusan_session) opt.selected = true;
-                jurusanEl.appendChild(opt);
-            });
-        })
-        .catch(err => console.error("Error fetch jurusan:", err));
-});
-
-if(fakultasEl.value) {
-    fakultasEl.dispatchEvent(new Event('change'));
-}
-</script>
+<script src="<?=BASEURL?>assets/js/script.js"></script>
 
 <?php include 'partials/footer.php'; ?>

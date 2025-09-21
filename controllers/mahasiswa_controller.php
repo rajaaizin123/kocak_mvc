@@ -58,7 +58,7 @@ class mahasiswaController {
         $fakultas = $this->model->getFakultas();
         $fakultas_aktif = $_POST['fakultas'] ?? $mhs['fakultas_id'] ?? 0;
         $jurusanList = $this->model->getJurusanByFakultas($fakultas_aktif);
-        $jurusan_aktif = $_POST['jurusan_id'] ?? $mhs['jurusan_id'] ?? 0;
+        $jurusan_aktif = $this->model->getJurusanById($mhs['jurusan_id']);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

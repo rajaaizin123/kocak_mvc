@@ -27,50 +27,17 @@
     </select>
 
     Jurusan:
-    <select name="jurusan_id" id="jurusan" required class="styled-select">
+    <select name="jurusan_id" id="jurusan" data-selected="<?= $mhs['jurusan_id'] ?? '' ?>" required class="styled-select">
         <option value="">-- Pilih Jurusan --</option>
-        <?php foreach ($jurusanList as $j) : ?>
-            <option value="<?= $j['id']; ?>" <?= ($j['id'] == $jurusan_aktif ? 'selected' : ''); ?>>
-                <?= htmlspecialchars($j['nama']); ?>
-            </option>
-        <?php endforeach; ?>
     </select>
     <br>
 
-    <button type="submit">Update</button>
+    <button type="submit">Update</button><br>
     <a href="index.php?controller=mahasiswa&action=index">Kembali</a>
 </form>
 
-<script src="<?= BASEURL ?>/assets/js/script.js"></script>
+<script src="<?= BASEURL ?>assets/js/script.js"></script>
 
 <?php include 'partials/footer.php'; ?>
-<script>
-    const fakultasEl = document.getElementById('fakultas');
-    const jurusanEl = document.getElementById('jurusan');
-    const jurusan_session = "<?= $mhs['jurusan_id'] ?? '' ?>";
-
-    fakultasEl.addEventListener('change', function() {
-        const fid = this.value;
-        jurusanEl.innerHTML = '<option value="">-- Pilih Jurusan --</option>';
-        if (!fid) return;
-
-        fetch(`index.php?controller=mahasiswa&action=getJurusanAjax&fakultas_id=${fid}`)
-            .then(res => res.json())
-            .then(data => {
-                data.forEach(j => {
-                    const opt = document.createElement('option');
-                    opt.value = j.id;
-                    opt.textContent = j.nama;
-                    if(j.id == jurusan_session) opt.selected = true;
-                    jurusanEl.appendChild(opt);
-                });
-            })
-            .catch(err => console.error("Error fetch jurusan:", err));
-    });
-    
-    if(fakultasEl.value) {
-        fakultasEl.dispatchEvent(new Event('change'));
-    }
-</script>
 
 <?php include 'partials/footer.php'; ?>

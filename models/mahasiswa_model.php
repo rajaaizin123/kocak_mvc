@@ -7,7 +7,8 @@ class Mahasiswa {
         $this->conn = $conn;
     }
 
-    public function all() {
+    public function all() 
+    {
        $sql = "
             SELECT 
                 m.id, m.nama, m.nim, m.email,
@@ -27,7 +28,8 @@ class Mahasiswa {
         return $rows;
     }
 
-    public function find($id) {
+    public function find($id) 
+    {
         $stmt = $this->conn->prepare("
             SELECT 
                 m.id, m.nama, m.nim, m.email,
@@ -78,26 +80,21 @@ class Mahasiswa {
         return $stmt->execute();
     }
 
-    public function validate($data) {
+    public function validate($data) 
+    {
         $errors = [];
 
         $nama = trim($data['nama'] ?? '');
         $nim = trim($data['nim'] ?? '');
-        $jurusan = trim($data['jurusan_id'] ?? '');
         $email = trim($data['email'] ?? '');
-        $fakultas = trim($data['fakultas'] ?? '');
 
         if ($nama === '') $errors[] = "Nama wajib diisi.";
 
         if ($nim === '') $errors[] = "NIM wajib diisi.";
         elseif (!preg_match('/^\d+$/', $nim)) $errors[] = "NIM harus berupa angka.";
 
-        if ($jurusan === '') $errors[] = "Jurusan wajib diisi.";
-
         if ($email === '') $errors[] = "Email wajib diisi";
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Email tak valid";
-
-        if ($fakultas === '') $errors[] = "Fakultas wajib diisi";
 
         return $errors;
     }
@@ -125,4 +122,11 @@ class Mahasiswa {
         return $rows;
     }
 
+    public function getJurusanById($id) 
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM jurusan WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
 }

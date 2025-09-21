@@ -10,5 +10,7 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-define('BASEURL', 'http://localhost/KOCAK_MVC/');
+$host = $_SERVER['HTTP_HOST'];
+$folder = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
 
+define('BASEURL', 'http://' . $host . $folder);
