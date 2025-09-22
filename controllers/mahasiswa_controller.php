@@ -13,13 +13,13 @@ class mahasiswaController {
     {
         $data = $this->model->all();
 
-        $_SESSION['title'] = "Data Mahasiswa";
+        $title = "Data mahasiswa";
         require('views/mahasiswa_list.php');
     }
 
     public function create() 
     {
-        $_SESSION['title'] = "Tambah Mahasiswa";
+        $title = "Tambah Mahasiswa";
         $errors = [];
 
         $fakultas = $this->model->getFakultas();
@@ -46,7 +46,7 @@ class mahasiswaController {
 
     public function edit($id) 
     {
-        $_SESSION['title'] = "Edit Mahasiswa";
+        $title = "Edit Mahasiswa";
         $mhs = $this->model->find($id);
         if (!$mhs){
             echo "mahasiswa dengan ID $id tidak ada.";
